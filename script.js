@@ -2,7 +2,7 @@ const canvas = document.getElementById('qrcode');
 canvas.width = 500;   // increased from 300
 canvas.height = 500;  // increased from 300
 
-const message = "🎉 Happy Birthday! 🎉"; // hidden message
+const message = "TARA TAGAY"; // hidden message
 
 // Gradient colors for smooth transition
 const gradientColors = [
