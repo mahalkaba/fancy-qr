@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Full-Screen QR</title>
+<style>
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    overflow: hidden;
+  }
+
+  .qr-wrapper {
+    width: 90vmin;
+    height: 90vmin;
+    animation: rotate3D 8s infinite linear;
+  }
+
+
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="qr-wrapper">
+  <canvas id="qrcode"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+<script>
+// Canvas setup
+const canvas = document.getElementById('qrcode');
+const wrapper = canvas.parentElement;
+canvas.width = wrapper.clientWidth;
+canvas.height = wrapper.clientHeight;
+
+// Hidden message
+const message = "🎉 Happy Birthday! 🎉";
+
+// Color palette
+const colors = ['#ff4d6d', '#ffb84d', '#4dff4d', '#4d4dff', '#ff4dff', '#00ffff', '#ffff4d'];
+let currentIndex = 0;
+
+// Smooth color transition
+let lastTime = 0;
+const interval = 400; // ms per color
+
+function animate(time) {
+    if (!lastTime) lastTime = time;
+    if (time - lastTime > interval) {
+        // Draw QR with new color
+        QRCode.toCanvas(canvas, message, {
+            color: { dark: colors[currentIndex], light: '#ffffff' }
+        }, function(err){ if(err) console.error(err); });
+        
+        currentIndex = (currentIndex + 1) % colors.length;
+        lastTime = time;
+    }
+    requestAnimationFrame(animate);
+}
+
+// Start animation
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

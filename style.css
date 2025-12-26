@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(120deg, #1a1a1a, #222222);
+    margin: 0;
+    perspective: 800px; /* for 3D rotation */
+}
+
+.qr-wrapper {
+    width: 500px;    /* increased from 300px */
+    height: 500px;   /* increased from 300px */
+    animation: rotate3D 6s infinite linear;
+}
+
